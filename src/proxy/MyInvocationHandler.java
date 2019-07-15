@@ -6,21 +6,22 @@ import java.lang.reflect.Proxy;
 
 public class MyInvocationHandler implements InvocationHandler {
 
-    private TargetService targetService;
+    private Object proxyObj;
 
-    public MyInvocationHandler(TargetService targetService) {
-        this.targetService = targetService;
+    public MyInvocationHandler(Object proxyObj) {
+        this.proxyObj = proxyObj;
     }
 
     Object getProxy() {
-        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), targetService.getClass().getInterfaces(), this);
+        Object realObj = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), proxyObj.getClass().getInterfaces(), this);
+        return realObj;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println(proxy.getClass().getName());
         System.out.println("before");
-        Object result = method.invoke(targetService, args);
+        Object result = method.invoke(proxyObj, args);
         System.out.println("after");
         return result;
     }

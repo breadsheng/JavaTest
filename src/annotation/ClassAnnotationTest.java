@@ -1,31 +1,11 @@
 package annotation;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.TypeElement;
-import java.util.Set;
+public class ClassAnnotationTest {
 
-public class ClassAnnotationTest extends AbstractProcessor {
+    @ClassAnnotation("breadsheng")
+    private int field;
 
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return super.getSupportedAnnotationTypes();
-    }
-
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return super.getSupportedSourceVersion();
-    }
-
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-    }
-
-    @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        return false;
+    public static void main(String[] args) {
+        System.out.println("start class annotation test");
     }
 }
